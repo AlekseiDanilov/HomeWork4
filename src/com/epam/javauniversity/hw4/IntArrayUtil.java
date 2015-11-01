@@ -50,4 +50,18 @@ public final class IntArrayUtil {
         }
         return newArray;
     }
+    public static void print(int[] array) {
+        if (array == null) {
+            System.out.println("array is null");
+            return;
+        }
+        if (array.length == 0) {
+            System.out.println("array is empty");
+            return;
+        }
+        for (int i = 0; i < array.length; i++) {
+            System.out.print(array[i] + " ");
+        }
+        System.out.println();
+    }
 }
