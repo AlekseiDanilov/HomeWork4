@@ -19,4 +19,19 @@ public final class IntArrayUtil {
         }
         return newArray;
     }
+
+    public static boolean equals(int[] firstArray, int[] secondArray) {
+        if (firstArray == null || secondArray == null) {
+            return false;
+        }
+        if (firstArray.length != secondArray.length) {
+            return false;
+        }
+        for (int i = 0; i < firstArray.length; i++) {
+            if (firstArray[i] != secondArray[i]) {
+                return false;
+            }
+        }
+        return true;
+    }
 }
