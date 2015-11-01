@@ -1,5 +1,7 @@
 package com.epam.javauniversity.hw4;
 
+import java.util.Random;
+
 public final class IntArrayUtil {
 
     private IntArrayUtil() {
@@ -33,5 +35,19 @@ public final class IntArrayUtil {
             }
         }
         return true;
+    }
+
+    public static int[] mix(int[] array) {
+        if (array == null) {
+            return new int[]{};
+        }
+        int[] newArray = array;
+        for (int i = 0; i < newArray.length; i++) {
+            int tmp = newArray[i];
+            int rndIndex = new Random().nextInt() % newArray.length;
+            newArray[i] = newArray[rndIndex];
+            newArray[rndIndex] = tmp;
+        }
+        return newArray;
     }
 }
