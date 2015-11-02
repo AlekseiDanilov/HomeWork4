@@ -50,6 +50,7 @@ public final class IntArrayUtil {
         }
         return newArray;
     }
+
     public static void print(int[] array) {
         if (array == null) {
             System.out.println("array is null");
