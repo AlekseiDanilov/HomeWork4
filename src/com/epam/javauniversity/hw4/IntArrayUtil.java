@@ -22,7 +22,7 @@ public final class IntArrayUtil {
         return newArray;
     }
 
-    public static boolean equals(int[] firstArray, int[] secondArray) {
+    public static boolean equalsArrays(int[] firstArray, int[] secondArray) {
         if (firstArray == null || secondArray == null) {
             return false;
         }
@@ -41,12 +41,18 @@ public final class IntArrayUtil {
         if (array == null) {
             return new int[]{};
         }
-        int[] newArray = array;
+        int[] newArray = new int[array.length];
         for (int i = 0; i < newArray.length; i++) {
-            int tmp = newArray[i];
-            int rndIndex = new Random().nextInt() % newArray.length;
-            newArray[i] = newArray[rndIndex];
-            newArray[rndIndex] = tmp;
+            newArray[i] = array[i];
+        }
+        Random r = new Random();
+        for (int i = 0; i < newArray.length; i++)
+        {
+            int randomIndex = i + r.nextInt(newArray.length - i);
+            int temp = newArray[i];
+            newArray[i] = newArray[randomIndex];
+            newArray[randomIndex] = temp;
+            System.out.println(newArray[i]);
         }
         return newArray;
     }

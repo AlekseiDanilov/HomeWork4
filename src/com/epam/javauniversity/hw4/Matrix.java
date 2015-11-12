@@ -2,44 +2,78 @@ package com.epam.javauniversity.hw4;
 
 public class Matrix {
     int[][] array;
-    int n;
-    int m;
+    int numberRow;
+    int numberCol;
 
     public Matrix() {
+        array = new int[][]{};
+    }
+
+    public Matrix(Matrix matrix) {
+        this.numberRow = matrix.numberRow;
+        this.numberCol = matrix.numberCol;
+        for (int i = 0; i < numberRow; i++) {
+            for (int j = 0; j < numberCol; j++) {
+                this.array[i][j] = matrix.array[i][j];
+            }
+        }
     }
 
     public Matrix(int[][] array) {
         if (isMatrix(array)) {
-            this.array = array;
-            n = numberLine(array);
-            m = numberColumns(array);
+            numberRow = getNumberRow(array);
+            numberCol = getNumberCol(array);
+            for (int i = 0; i < numberRow; i++) {
+                for (int j = 0; j < numberCol; j++) {
+                    this.array[i][j] = array[i][j];
+                }
+            }
         }
     }
 
     public int getElement(int i, int j) {
-        if (i >= n || j >= m || i < 0 || j < 0) {
-            return 0xFFFF;
+        if (i >= numberRow || j >= numberCol || i < 0 || j < 0) {
+            return 0xffff;
         }
         return array[i][j];
     }
 
     public void setElement(int i, int j, int value) {
-        if (i >= n || j >= m || i < 0 || j < 0) {
+        if (i >= numberRow || j >= numberCol || i < 0 || j < 0) {
             return;
         }
         array[i][j] = value;
 
     }
 
-    public void addition(Matrix matrix) {
-        if (this.n == matrix.n && this.m == matrix.m) {
-            for (int i = 0; i < this.n; i++) {
-                for (int j = 0; j < this.m; j++) {
-                    this.array[i][j] += matrix.array[i][j];
+    public Matrix add(Matrix matrix) {
+        if (this.numberRow != matrix.numberRow || this.numberCol != matrix.numberCol) {
+            return new Matrix();
+        }
+        Matrix result = new Matrix(new int[this.numberRow][this.numberCol]);
+        for (int i = 0; i < this.numberRow; i++) {
+            for (int j = 0; j < this.numberCol; j++) {
+                result.array[i][j] = this.array[i][j] + matrix.array[i][j];
+            }
+        }
+        return result;
+    }
+
+    public Matrix mul(Matrix matrix) {
+        if (this.numberCol != matrix.numberRow) {
+            return new Matrix();
+        }
+        Matrix result = new Matrix(new int[this.numberRow][matrix.numberCol]);
+        for (int i = 0; i < this.numberRow; i++) {
+            for (int j = 0; j < matrix.numberCol; j++) {
+                for (int k = 0; k < matrix.numberRow; k++) {
+                    result.array[i][j] += this.array[i][k] * matrix.array[k][j];
                 }
             }
         }
+        return result;
     }
+
     public boolean isMatrix(int[][] array) {
         if (array == null) {
             return false;
@@ -61,11 +95,11 @@ public class Matrix {
         return true;
     }
 
-    private int numberLine(int[][] matrix) {
+    private int getNumberRow(int[][] matrix) {
         return matrix.length;
     }
 
-    private int numberColumns(int[][] array) {
+    private int getNumberCol(int[][] array) {
         return array[0].length;
     }
 }

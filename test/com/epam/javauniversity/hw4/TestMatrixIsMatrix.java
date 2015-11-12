@@ -7,7 +7,8 @@ import static org.junit.Assert.*;
 public class TestMatrixIsMatrix {
     @Test
     public void testMatrixIsMatrixTrue() {
-        assertTrue(new Matrix().isMatrix(new int[][]{{1, 2}, {3, 4}}));
+        assertTrue(new Matrix().isMatrix(new int[][]{{1, 2},
+                                                     {3, 4}}));
     }
 
     @Test
@@ -17,12 +18,15 @@ public class TestMatrixIsMatrix {
 
     @Test
     public void testMatrixIsMatrixFirstLineNull() {
-        assertFalse(new Matrix().isMatrix(new int[][]{null, {1, 2}}));
+        assertFalse(new Matrix().isMatrix(new int[][]{null,
+                                                     {1, 2}}));
     }
 
     @Test
     public void testMatrixIsMatrixLineNull() {
-        assertFalse(new Matrix().isMatrix(new int[][]{{1, 2}, null, {5, 9}}));
+        assertFalse(new Matrix().isMatrix(new int[][]{{1, 2},
+                                                       null,
+                                                      {5, 9}}));
     }
 
     @Test
