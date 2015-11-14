@@ -4,6 +4,7 @@ public class Matrix {
     int[][] array;
     int numberRow;
     int numberCol;
+    double determinant;
 
     public Matrix() {
         array = new int[][]{};
@@ -23,6 +24,7 @@ public class Matrix {
         if (isMatrix(array)) {
             numberRow = getNumberRow(array);
             numberCol = getNumberCol(array);
+            this.array = new int[numberRow][numberCol];
             for (int i = 0; i < numberRow; i++) {
                 for (int j = 0; j < numberCol; j++) {
                     this.array[i][j] = array[i][j];
@@ -33,7 +35,8 @@ public class Matrix {
 
     public int getElement(int i, int j) {
         if (i >= numberRow || j >= numberCol || i < 0 || j < 0) {
-            return 0xffff;
+            System.out.println("Incorrect i and/or j");
+            return 0;
         }
         return array[i][j];
     }
@@ -95,11 +98,73 @@ public class Matrix {
         return true;
     }
 
-    private int getNumberRow(int[][] matrix) {
-        return matrix.length;
+    private int getNumberRow(int[][] array) {
+        return array.length;
     }
 
     private int getNumberCol(int[][] array) {
         return array[0].length;
+    }
+
+    public double calcDeterminamt() {
+        if (numberCol != numberRow) {
+            System.out.println("For matrix not exist determinant");
+            return 0;
+        }
+        double[][] arrayForCalcDet = new double[numberRow][numberCol];
+        for (int i = 0; i < numberRow; i++) {
+            for (int j = 0; j < numberCol; j++) {
+                arrayForCalcDet[i][j] = array[i][j];
+            }
+        }
+        determinant = 1.0;
+        for (int i = 0; i < numberRow - 1; i++) {
+            int indexRow = i;
+            swapRowAndReturnCoef(arrayForCalcDet, indexRow);
+            conversion(arrayForCalcDet, indexRow);
+        }
+
+
+        for (int i = 0; i < numberRow; i++) {
+            determinant *= arrayForCalcDet[i][i];
+        }
+        System.out.println(determinant);
+        return determinant;
+    }
+
+    private int calcMaxElementRow(int ord) {
+        int indexRowMaxElement = ord;
+        int maxElement = array[ord][ord];
+        for (int j = ord; j < numberRow; j++) {
+            if (Math.abs(array[0][j]) > maxElement) {
+                maxElement = array[0][j];
+                indexRowMaxElement = j;
+            }
+        }
+        return indexRowMaxElement;
+    }
+
+    private void swapRowAndReturnCoef(double[][] arrayForCalcDet, int indexRow) {
+        int indexRowMaxElement = calcMaxElementRow(indexRow);
+        if (indexRow == indexRowMaxElement) {
+            return;
+        }
+        double[] tempRow = arrayForCalcDet[indexRow];
+        arrayForCalcDet[indexRow] = arrayForCalcDet[indexRowMaxElement];
+        arrayForCalcDet[indexRowMaxElement] = tempRow;
+        determinant *= (-1.0);
+    }
+
+    private void conversion(double[][] arrayForCalcDet, int indexRow) {
+        for (int i = indexRow; i < numberRow - 1; i++) {
+            if (!(arrayForCalcDet[i + 1][indexRow] == 0)) {
+                double coef = arrayForCalcDet[indexRow][indexRow] / arrayForCalcDet[i + 1][indexRow];
+                determinant *= (-1.0) / coef;
+                for (int k = 0; k < numberRow; k++)
+                    arrayForCalcDet[i + 1][k] *= (-coef);
+                for (int g = 0; g < numberRow; g++)
+                    arrayForCalcDet[i + 1][g] += arrayForCalcDet[indexRow][g];
+            }
+        }
     }
 }

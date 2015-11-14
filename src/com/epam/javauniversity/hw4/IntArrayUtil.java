@@ -46,8 +46,7 @@ public final class IntArrayUtil {
             newArray[i] = array[i];
         }
         Random r = new Random();
-        for (int i = 0; i < newArray.length; i++)
-        {
+        for (int i = 0; i < newArray.length; i++) {
             int randomIndex = i + r.nextInt(newArray.length - i);
             int temp = newArray[i];
             newArray[i] = newArray[randomIndex];
