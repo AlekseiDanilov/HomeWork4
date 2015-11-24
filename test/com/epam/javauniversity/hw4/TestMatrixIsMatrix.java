@@ -31,8 +31,8 @@ public class TestMatrixIsMatrix {
 
     @Test
     public void testMatrixIsMatrixEmpty() {
-        assertFalse(new Matrix().isMatrix(new int[][]{{},
-                                                      {},
-                                                      {}}));
+        assertTrue(new Matrix().isMatrix(new int[][]{{},
+                                                     {},
+                                                     {}}));
     }
 }

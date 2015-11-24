@@ -10,8 +10,8 @@ public class TestMatrixSetElement {
         Matrix testMatrix = new Matrix(new int[][] {{1, 2},
                                                     {3, 4}});
         testMatrix.setElement(1, 1, 99);
-        assertArrayEquals(testMatrix.array, new int[][] {{1, 2},
-                                                         {3, 99}});
+        assertArrayEquals(testMatrix.getElements(), new int[][] {{1, 2},
+                                                                 {3, 99}});
     }
 
 }

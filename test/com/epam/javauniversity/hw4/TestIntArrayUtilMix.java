@@ -10,8 +10,7 @@ public class TestIntArrayUtilMix {
     @Test
     public void testIntArrayUtilMix() {
         int array[] = {1, 2, 3, 4, 5};
-        assertFalse(IntArrayUtil.equalsArrays(array,
-                                              IntArrayUtil.mix(array)));
+        assertTrue(IntArrayUtil.equals(array,IntArrayUtil.mix(array)));
     }
 
     @Test
@@ -22,6 +21,6 @@ public class TestIntArrayUtilMix {
 
     @Test
     public void testIntArraysUtilMixNull() {
-        assertTrue(IntArrayUtil.equalsArrays(IntArrayUtil.mix(null),new int[]{}));
+        assertTrue(IntArrayUtil.equals(IntArrayUtil.mix(null),new int[]{}));
     }
 }

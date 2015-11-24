@@ -19,5 +19,8 @@ public class TestIntArrayUtilEditLength {
     @Test
     public void testIntArrayUtilEditLengthNull() {
         assertArrayEquals(IntArrayUtil.editLength(null, 5), new int[]{0, 0, 0, 0, 0});
+        assertArrayEquals(IntArrayUtil.editLength(null, 0), new int[]{});
+        assertArrayEquals(IntArrayUtil.editLength(new int[]{},0), new int[]{});
+        assertFalse(IntArrayUtil.editLength(null,0).equals(null));
     }
 }
