@@ -10,7 +10,7 @@ public final class IntArrayUtil {
 
     public static int[] editLength(int[] array, int newLength) {
         if (array == null) {
-            return new int[newLength];
+            throw new NullPointerException("array is null");
         }
         int[] newArray = new int[newLength];
         for (int i = 0; i < newLength; i++) {
@@ -23,7 +23,7 @@ public final class IntArrayUtil {
 
     public static boolean equals(int[] firstArray, int[] secondArray) {
         if (firstArray == null || secondArray == null) {
-            return false;
+            throw new NullPointerException("one array of equals is null");
         }
         for (int i = 0; i < firstArray.length; i++) {
             if (!IntArrayUtil.contains(firstArray, secondArray[i])) {
@@ -35,7 +35,7 @@ public final class IntArrayUtil {
 
     public static boolean contains(int[] array, int value) {
         if (array == null) {
-            return false;
+            throw new NullPointerException("array is null");
         }
         for (int i = 0; i < array.length; i++) {
             if (array[i] == value) {
@@ -47,7 +47,7 @@ public final class IntArrayUtil {
 
     public static int[] mix(int[] array) {
         if (array == null) {
-            return new int[]{};
+            throw new NullPointerException("array is null");
         }
         int [] newArray = Arrays.copyOf(array, array.length);
         Random r = new Random();
@@ -58,6 +58,24 @@ public final class IntArrayUtil {
             newArray[randomIndex] = temp;
         }
         return newArray;
+    }
+
+    public static int[] filter(int[] array, Predicate predicate) {
+        if (array == null) {
+            throw new NullPointerException("array is null");
+        }
+        if (predicate == null) {
+            throw new NullPointerException("predicate is null");
+        }
+        int[] temp = new int[array.length];
+        int count = 0;
+        for (int i = 0; i < array.length; i++) {
+            if (predicate.apply(array[i])) {
+                temp[count] = array[i];
+                count++;
+            }
+        }
+        return Arrays.copyOf(temp, count);
     }
 
     public static void print(int[] array) {
